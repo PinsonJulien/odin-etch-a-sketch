@@ -38,10 +38,6 @@ export default class Grid extends Element {
         this.onSquareClick(e)
       });
 
-      if (i%2 === 0) {
-        square.style.backgroundColor = 'red';
-      }
-
       this.squares.push(square);
     }
 

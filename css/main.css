@@ -51,5 +51,5 @@ main {
 .square {
   aspect-ratio: 1/1;
   user-select: none;
-  background-color: white;
+  background-color: inherit;
 }
