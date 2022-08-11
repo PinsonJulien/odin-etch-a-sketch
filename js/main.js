@@ -1,4 +1,5 @@
 import Grid from "../js/grid.js";
+import { getRandomHexColor } from "../js/utils.js";
 
 const defaultGridSize = 16;
 const defaultBrushColor = '#000000';
@@ -12,10 +13,7 @@ const grid = new Grid("grid");
 grid.setSize(defaultGridSize);
 grid.element.style.backgroundColor = defaultBackgroundColor;
 
-grid.setOnSquareClick((e) => {
-  const node = e.currentTarget;
-  node.style.backgroundColor = currentBrushColor;
-});
+grid.setOnSquareClick((e) => colorBrushMode(e));
 
 const brushColorPicker = document.getElementById("brush-color-picker");
 brushColorPicker.value = defaultBrushColor;
@@ -30,3 +28,38 @@ backgroundColorPicker.addEventListener("input", (e) => {
 
   grid.element.style.backgroundColor = currentBackgroundColor;
 });
+
+// Clicking on a radio input changes the brush mode
+const brushModes = document.getElementsByName("brush-mode");
+brushModes.forEach (i => {
+    i.addEventListener('change', (e) => {
+      const value = e.target.value;
+
+      const fct = (() => {
+        switch(value) {
+          case 'color':
+            return (e) => colorBrushMode(e);
+          case 'rainbow':
+            return (e) => rainbowBrushMode(e);
+          case 'lighten':
+            return null;
+          case 'darken':
+            return null; 
+          case 'erase':
+            return null;
+        }
+      })();
+
+      grid.setOnSquareClick(fct);
+    });
+  });
+
+function colorBrushMode(e) {
+  const node = e.currentTarget;
+  node.style.backgroundColor = currentBrushColor;
+}
+
+function rainbowBrushMode(e) {
+  const node = e.currentTarget;
+  node.style.backgroundColor = getRandomHexColor();
+}
