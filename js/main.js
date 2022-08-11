@@ -41,11 +41,11 @@ brushModes.forEach (i => {
             return (e) => colorBrushMode(e);
           case 'rainbow':
             return (e) => rainbowBrushMode(e);
+          case 'eraser':
+            return (e) => eraserBrushMode(e);
           case 'lighten':
             return null;
           case 'darken':
-            return null; 
-          case 'erase':
             return null;
         }
       })();
@@ -54,12 +54,19 @@ brushModes.forEach (i => {
     });
   });
 
-function colorBrushMode(e) {
+function setElementBackgroundColor(e, color) {
   const node = e.currentTarget;
-  node.style.backgroundColor = currentBrushColor;
+  node.style.backgroundColor = color;
+}
+
+function colorBrushMode(e) {
+  setElementBackgroundColor(e, currentBrushColor);
 }
 
 function rainbowBrushMode(e) {
-  const node = e.currentTarget;
-  node.style.backgroundColor = getRandomHexColor();
+  setElementBackgroundColor(e, getRandomHexColor());
+}
+
+function eraserBrushMode(e) {
+  setElementBackgroundColor(e, null);
 }
