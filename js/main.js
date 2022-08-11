@@ -1,5 +1,5 @@
 import Grid from "../js/grid.js";
-import { getRandomHexColor } from "../js/utils.js";
+import { adjustColorLighting, getRandomHexColor } from "../js/utils.js";
 
 const defaultGridSize = 16;
 const defaultBrushColor = '#000000';
@@ -44,9 +44,11 @@ brushModes.forEach (i => {
           case 'eraser':
             return (e) => eraserBrushMode(e);
           case 'lighten':
-            return null;
+            return (e) => lightingBrushMode(e, 30);
           case 'darken':
-            return null;
+            return (e) => lightingBrushMode(e, -30);
+          default: 
+            return () => null;
         }
       })();
 
@@ -56,6 +58,7 @@ brushModes.forEach (i => {
 
 function setElementBackgroundColor(e, color) {
   const node = e.currentTarget;
+  node.setAttribute('background-color', color || '');
   node.style.backgroundColor = color;
 }
 
@@ -69,4 +72,10 @@ function rainbowBrushMode(e) {
 
 function eraserBrushMode(e) {
   setElementBackgroundColor(e, null);
+}
+
+function lightingBrushMode(e, nb) {
+  const node = e.currentTarget;
+  const color = node.getAttribute('background-color') || currentBackgroundColor;
+  setElementBackgroundColor(e, adjustColorLighting(color, nb));
 }

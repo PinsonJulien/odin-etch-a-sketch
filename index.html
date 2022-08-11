@@ -27,13 +27,13 @@
       <section id="options">
         <div id="color-group">
           <div>
-            <input type="color" id="brush-color-picker" name="head">
-            <label for="head">Color</label>
+            <input type="color" id="brush-color-picker" name="brush-color-picker">
+            <label for="brush-color-picker">Brush</label>
           </div>
 
           <div>
-            <input type="color" id="background-color-picker" name="head">
-            <label for="head">Color</label>
+            <input type="color" id="background-color-picker" name="background-color-picker">
+            <label for="background-color-picker">Background</label>
           </div>
         </div>
 
@@ -69,6 +69,26 @@
               value="eraser" 
             >
             <label for="eraser">Eraser</label>
+          </div>
+
+          <div>
+            <input 
+              type="radio" 
+              id="lighten" 
+              name="brush-mode" 
+              value="lighten" 
+            >
+            <label for="lighten">Lighten</label>
+          </div>
+
+          <div>
+            <input 
+              type="radio" 
+              id="darken" 
+              name="brush-mode" 
+              value="darken" 
+            >
+            <label for="darken">Darken</label>
           </div>
     
         </fieldset>

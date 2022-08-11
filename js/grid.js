@@ -25,6 +25,7 @@ export default class Grid extends Element {
     for (let i = 0; i < nbSquares; ++i) {
       const square = document.createElement("div");
       square.classList.add("square");
+      square.setAttribute('background-color', '');
       
       // When the user clicks and move over squares, they change color.
       square.addEventListener("mouseover", (e) => {
