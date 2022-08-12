@@ -22,14 +22,14 @@ gridSizeInput.setAttribute('value', defaultGridSize);
 const gridSizeLabel = document.getElementById("grid-size-label");
 const changeGridSizeLabelText = (value) => {
   return gridSizeLabel.textContent = `${value} x ${value}`;
-}
+};
+changeGridSizeLabelText(defaultGridSize);
+
 gridSizeInput.addEventListener('input', (e) => {
   const value = e.target.value;
   grid.setSize(value);
   changeGridSizeLabelText(value);
 });
-
-changeGridSizeLabelText(defaultGridSize);
 
 // Brush color picker
 const brushColorPicker = document.getElementById("brush-color-picker");
@@ -93,7 +93,9 @@ function eraserBrushMode(e) {
 }
 
 function lightingBrushMode(e, nb) {
-  const node = e.currentTarget;
-  const color = node.getAttribute('background-color') || currentBackgroundColor;
-  setElementBackgroundColor(e, adjustColorLighting(color, nb));
+  const backgroundColor = 
+    e.currentTarget.getAttribute('background-color') 
+    || 
+    currentBackgroundColor;
+  setElementBackgroundColor(e, adjustColorLighting(backgroundColor , nb));
 }
