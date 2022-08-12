@@ -1,7 +1,7 @@
 import Grid from "../js/grid.js";
 import { adjustColorLighting, getRandomHexColor } from "../js/utils.js";
 
-const defaultGridSize = 16;
+const defaultGridSize = 64/2;
 const defaultBrushColor = '#000000';
 const defaultBackgroundColor = '#ffffff';
 
@@ -9,18 +9,36 @@ let currentBrushColor = defaultBrushColor;
 let currentBackgroundColor = defaultBackgroundColor;
 
 // Setup of all dynamic elements
+// Grid of squares
 const grid = new Grid("grid");
 grid.setSize(defaultGridSize);
 grid.element.style.backgroundColor = defaultBackgroundColor;
-
 grid.setOnSquareClick((e) => colorBrushMode(e));
 
+// Grid size range input
+const gridSizeInput = document.getElementById("grid-size");
+gridSizeInput.setAttribute('value', defaultGridSize);
+
+const gridSizeLabel = document.getElementById("grid-size-label");
+const changeGridSizeLabelText = (value) => {
+  return gridSizeLabel.textContent = `${value} x ${value}`;
+}
+gridSizeInput.addEventListener('input', (e) => {
+  const value = e.target.value;
+  grid.setSize(value);
+  changeGridSizeLabelText(value);
+});
+
+changeGridSizeLabelText(defaultGridSize);
+
+// Brush color picker
 const brushColorPicker = document.getElementById("brush-color-picker");
 brushColorPicker.value = defaultBrushColor;
 brushColorPicker.addEventListener("input", (e) => {
   currentBrushColor = e.target.value;
 });
 
+// Background color picker
 const backgroundColorPicker = document.getElementById("background-color-picker");
 backgroundColorPicker.value = defaultBackgroundColor;
 backgroundColorPicker.addEventListener("input", (e) => {
