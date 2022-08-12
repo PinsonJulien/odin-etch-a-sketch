@@ -38,6 +38,7 @@ main {
   gap: 1em;
   padding: 1em;
   padding-top: 3em;
+  margin: 0 auto 0 auto;
 }
 
 @media only screen and (max-width: 576px) {
